@@ -1,0 +1,24 @@
+# Cœur du framework YOLOv8
+ultralytics>=8.1.0
+
+# PyTorch & Vision (Vital pour l'accélération MPS sur Mac M2)
+# Note : Ultralytics installe torch automatiquement, mais l'expliciter
+# permet de vérifier qu'on cible une version récente compatible Apple Silicon.
+torch>=2.2.0
+torchvision>=0.17.0
+
+# Traitement d'images et calcul matriciel
+opencv-python>=4.9.0
+numpy>=1.23.5
+pillow>=10.0.0
+
+# Analyse de données et visualisation (pour les graphiques d'entraînement)
+pandas>=2.0.0
+matplotlib>=3.8.0
+seaborn>=0.13.0
+tqdm
+pyyaml
+
+# Dataset
+kaggle
+

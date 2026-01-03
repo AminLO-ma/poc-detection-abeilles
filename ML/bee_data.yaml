@@ -1,0 +1,15 @@
+# bee_data.yaml
+
+# Chemin de base (relatif à l'endroit où tu lances le script ou absolu)
+path: ./datasets/bees
+
+# Dossiers d'images (relatifs au 'path' ci-dessus)
+train: train/images
+val: val/images
+
+# Nombre de classes
+nc: 1
+
+# Noms des classes
+names:
+  0: bee
