@@ -1,0 +1,10 @@
+cat <<EOF > .gitignore
+# Ignorer le dataset (trop lourd pour GitHub)
+datasets/
+# Ignorer les poids des modèles (fichiers .pt)
+*.pt
+runs/
+# Ignorer l'environnement virtuel et cache
+__pycache__/
+.DS_Store
+EOF
