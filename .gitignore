@@ -1,10 +1,29 @@
-cat <<EOF > .gitignore
-# Ignorer le dataset (trop lourd pour GitHub)
+# --- Datasets & Models (Trop lourds) ---
 datasets/
-# Ignorer les poids des modèles (fichiers .pt)
+models/
 *.pt
+*.tflite
+*.onnx
+
+# --- Logs & Cache ---
 runs/
-# Ignorer l'environnement virtuel et cache
 __pycache__/
 .DS_Store
-EOF
+.idea/
+.gradle/
+build/
+
+# --- Environment ---
+.venv/
+venv/
+env/
+
+# --- Documentation temporaire ---
+instruct.md
+
+# --- Android Auto-generated ---
+Android/app/build/
+Android/.gradle/
+local.properties
+
+ML/

@@ -17,4 +17,6 @@ local.properties
 ../ML/
 ../.venv/
 ../instruct.md
+bee_data.yaml
+train_yolo.py
 

@@ -2,10 +2,19 @@ package com.example.beedetectionapp.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+// --- Nuances Miel ---
+val HoneyGold = Color(0xFFFFC107)      // Jaune (Primary)
+val HoneyOrange = Color(0xFFFF9800)    // Orange (Secondary)
+val RoyalJelly = Color(0xFFFFE082)     // Jaune pâle (Background)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+// --- Nuances Sombres ---
+val HiveBlack = Color(0xFF1E1E1E)      // Noir (Surface Dark)
+val DeepCharcoal = Color(0xFF121212)   // Noir profond (Bg Dark)
+
+// --- Nuances Claires ---
+val PollenWhite = Color(0xFFFFFDF5)    // Blanc crème (Bg Light)
+val WaxBeige = Color(0xFFF0EAE2)       // Beige (Surface Light)
+
+// --- Utilitaire ---
+val AlertRed = Color(0xFFD32F2F)       // Erreur
+val SuccessGreen = Color(0xFF388E3C)   // Succès
