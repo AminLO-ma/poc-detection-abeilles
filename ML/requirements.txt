@@ -1,24 +1,35 @@
-# Cœur du framework YOLOv8
+# --- Core Framework ---
 ultralytics>=8.1.0
 
-# PyTorch & Vision (Vital pour l'accélération MPS sur Mac M2)
-# Note : Ultralytics installe torch automatiquement, mais l'expliciter
-# permet de vérifier qu'on cible une version récente compatible Apple Silicon.
+# --- PyTorch (Mac M-series compatible) ---
 torch>=2.2.0
 torchvision>=0.17.0
 
-# Traitement d'images et calcul matriciel
+# --- TensorFlow Ecosystem (Export Only) ---
+# IMPORTANT : On force la v2.15.0 qui est la plus stable pour l'export TFLite actuellement.
+# On n'inclut PAS 'tensorflow-metal' car il fait planter les scripts de conversion (erreur dlopen).
+tensorflow==2.15.0
+tf_keras~=2.15
+
+# --- ONNX / Conversion Tools (Dependency Hell Fix) ---
+# IMPORTANT : onnx doit être bloqué en 1.15.0 pour éviter le conflit 'ml-dtypes/float4'
+onnx==1.15.0
+onnxruntime>=1.15.0
+# Outils requis par Ultralytics pour l'export TFLite
+onnx2tf>=1.17.5
+sng4onnx
+onnx_graphsurgeon
+
+# --- Computer Vision & Data ---
+# CRITIQUE : Numpy doit être strictement inférieur à 2.0.0 sinon TensorFlow 2.15 plante
+numpy<2.0.0
 opencv-python>=4.9.0
-numpy>=1.23.5
 pillow>=10.0.0
 
-# Analyse de données et visualisation (pour les graphiques d'entraînement)
-pandas>=2.0.0
-matplotlib>=3.8.0
-seaborn>=0.13.0
+# --- Data Analysis & Utils ---
+pandas
+matplotlib
+seaborn
 tqdm
 pyyaml
-
-# Dataset
 kaggle
-

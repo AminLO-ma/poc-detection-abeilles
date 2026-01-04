@@ -4,6 +4,9 @@ datasets/
 # Ignorer les poids des modèles (fichiers .pt)
 *.pt
 
+# Ignorer les fichiers numpy
+*.npy
+
 # Dossier de logs d'entraînement
 runs/
 
@@ -13,3 +16,6 @@ __pycache__/
 
 # Virtual Environment
 .venv/
+
+# Conversion pt to tflite
+conversion_pt_to_tflite/
