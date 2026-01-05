@@ -19,3 +19,5 @@ __pycache__/
 
 # Conversion pt to tflite
 conversion_pt_to_tflite/
+
+Android/
