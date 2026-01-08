@@ -13,6 +13,8 @@ Pour faciliter l'évaluation, le projet est structuré en plusieurs branches dé
 1. **Entraînement** : YOLOv8n sur le dataset Kaggle Bee Detection.
 2. **Optimisation** : Conversion en TFLite pour l'accélération matérielle.
 3. **Application** : Intégration dans une app Android native (Kotlin + Jetpack Compose + LiteRT).
+## Liens : 
+1. **Lien Vidéo Demo**: https://drive.google.com/file/d/1arIwCv-fmM40V-OHzsfFFwNfdmmfy4UU/view?usp=sharing
 
 ## 🛠️ Installation
 ```bash
