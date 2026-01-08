@@ -1,4 +1,4 @@
-# 🐝 POC : Détection d'Abeilles sur Mobile
+# 🐝 POC : Détection d'Abeilles
 
 Ce projet vise à créer un système de détection d'abeilles en temps réel sur smartphone Android.
 
