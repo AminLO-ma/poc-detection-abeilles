@@ -33,12 +33,14 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.beedetectionapp.R
 import com.example.beedetectionapp.data.analyzer.BeeImageAnalyzer
 import com.example.beedetectionapp.ui.components.BeeCard
 import com.example.beedetectionapp.ui.theme.HoneyGold
@@ -138,51 +140,49 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
                 }
             }
 
-            // Canvas des bounding boxes
             Canvas(modifier = Modifier.fillMaxSize()) {
-                // Facteur d'échelle
-                val scale = maxOf(size.width / 640f, size.height / 640f)
-
-                // On calcule le décalage pour centrer l'image virtuelle
-                val offsetX = (size.width - 640f * scale) / 2
-                val offsetY = (size.height - 640f * scale) / 2
+                val canvasWidth = size.width
+                val canvasHeight = size.height
 
                 for (result in detections) {
                     val box = result.boundingBox
-                    // Ajustement coordonnées
-                    val left = box.left * scale + offsetX
-                    val top = box.top * scale + offsetY
-                    val right = box.right * scale + offsetX
-                    val bottom = box.bottom * scale + offsetY
+
+                    // 1. CALCUL DES COORDONNÉES
+                    val left = box.left * canvasWidth
+                    val top = box.top * canvasHeight
+                    val right = box.right * canvasWidth
+                    val bottom = box.bottom * canvasHeight
 
                     val width = right - left
                     val height = bottom - top
 
-                    // 1. Contour boîte
+                    // 2. DESSIN DU FOND (Semi-transparent)
                     drawRoundRect(
-                        color = HoneyGold,
-                        topLeft = Offset(left, top),
-                        size = androidx.compose.ui.geometry.Size(width, height),
-                        style = Stroke(width = 8f),
-                        cornerRadius = androidx.compose.ui.geometry.CornerRadius(16f, 16f)
-                    )
-
-                    // 2. Fond semi-transparent
-                    drawRoundRect(
-                        color = HoneyGold.copy(alpha = 0.2f),
+                        color = HoneyGold.copy(alpha = 0.2f), // Fond jaune transparent
                         topLeft = Offset(left, top),
                         size = androidx.compose.ui.geometry.Size(width, height),
                         cornerRadius = androidx.compose.ui.geometry.CornerRadius(16f, 16f)
                     )
 
-                    // 3. Texte label/score
+                    // 3. DESSIN DU CONTOUR (Cadre épais)
+                    drawRoundRect(
+                        color = HoneyGold, // Jaune Miel pur
+                        topLeft = Offset(left, top),
+                        size = androidx.compose.ui.geometry.Size(width, height),
+                        style = Stroke(width = 8f), // Épaisseur du trait
+                        cornerRadius = androidx.compose.ui.geometry.CornerRadius(16f, 16f)
+                    )
+
+                    // 4. DESSIN DU TEXTE (Score)
                     val confidence = (result.score * 100).toInt()
                     val label = "Abeille $confidence%"
 
+                    val textY = if (top > 30f) top - 10f else top + 40f
+
                     drawContext.canvas.nativeCanvas.drawText(
                         label,
-                        left,     // Position X
-                        top - 10, // Position Y
+                        left,
+                        textY,
                         textPaint
                     )
                 }
@@ -233,10 +233,8 @@ fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
                 // Carte détection
                 BeeCard(
                     title = "Détection",
-                    // Texte dynamique
                     value = if (detections.isEmpty()) "Aucune" else "${detections.size} détectée(s)",
-                    // On peut passer une couleur d'icône ou de texte différente au composant BeeCard si prévu
-                    // tint = if (detections.isNotEmpty()) HoneyGold else Color.Gray
+                    iconPainter = painterResource(id = R.drawable.bee_logo_)
                 )
 
                 // Aide si vide

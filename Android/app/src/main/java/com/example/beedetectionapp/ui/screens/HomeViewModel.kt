@@ -15,6 +15,12 @@ class HomeViewModel : ViewModel() {
 
     private var detector: TFLiteObjectDetector? = null
 
+    private var lastDetections: List<DetectionResult> = emptyList()
+    private var lastDetectionTime: Long = 0
+
+    // Temps (en ms) pendant lequel on garde le carré même si l'IA perd la cible
+    private val PERSISTENCE_TIME_MS = 300L
+
     // Init détecteur (unique)
     fun initDetector(context: Context) {
         if (detector == null) {
@@ -28,7 +34,19 @@ class HomeViewModel : ViewModel() {
     }
 
     fun onFrameReceived(results: List<DetectionResult>) {
-        _detectionResults.value = results
+        val currentTime = System.currentTimeMillis()
+
+        if (results.isNotEmpty()) {
+            _detectionResults.value = results
+            lastDetections = results
+            lastDetectionTime = currentTime
+        } else {
+            if (currentTime - lastDetectionTime < PERSISTENCE_TIME_MS) {
+                _detectionResults.value = lastDetections
+            } else {
+                _detectionResults.value = emptyList()
+            }
+        }
     }
 
     fun getDetector(): TFLiteObjectDetector? = detector
